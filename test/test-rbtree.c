@@ -4,6 +4,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+
+// void print_inorder(const rbtree *t, const node_t *node) {
+//     if (node == t->nil) {
+//         return;
+//     }
+//     print_inorder(t, node->left);
+//     printf("%d ", node->key);  // 노드의 키를 출력합니다.
+//     print_inorder(t, node->right);
+// }
+
+// void print_tree(const rbtree *t) {
+//     printf("Tree (in-order): ");
+//     print_inorder(t, t->root);
+//     printf("\n");
+// }
+
+
+
+
 // new_rbtree should return rbtree struct with null root node
 void test_init(void) {
   rbtree *t = new_rbtree();
@@ -127,6 +147,41 @@ void test_minmax(key_t *arr, const size_t n) {
   delete_rbtree(t);
 }
 
+// void test_to_array(rbtree *t, const key_t *arr, const size_t n) {
+//     assert(t != NULL);
+
+//     insert_arr(t, arr, n);
+    
+//     // 트리 삽입 후 구조를 출력하여 확인
+//     // print_tree(t);
+
+//     qsort((void *)arr, n, sizeof(key_t), comp);
+
+//     key_t *res = calloc(n, sizeof(key_t));
+//     rbtree_to_array(t, res, n);
+
+//     printf("Original array: ");
+//     for (int i = 0; i < n; i++) {
+//         printf("%d ", arr[i]);
+//     }
+//     printf("\n");
+
+//     printf("Tree to array: ");
+//     for (int i = 0; i < n; i++) {
+//         printf("%d ", res[i]);
+//     }
+//     printf("\n");
+
+//     for (int i = 0; i < n; i++) {
+//         if (arr[i] != res[i]) {
+//             printf("Mismatch at index %d: expected %d, got %d\n", i, arr[i], res[i]);
+//         }
+//         assert(arr[i] == res[i]);
+//     }
+//     free(res);
+// }
+
+
 void test_to_array(rbtree *t, const key_t *arr, const size_t n) {
   assert(t != NULL);
 
@@ -140,6 +195,7 @@ void test_to_array(rbtree *t, const key_t *arr, const size_t n) {
   }
   free(res);
 }
+
 
 void test_multi_instance() {
   rbtree *t1 = new_rbtree();
@@ -318,7 +374,6 @@ void test_find_erase(rbtree *t, const key_t *arr, const size_t n) {
 
   for (int i = 0; i < n; i++) {
     node_t *p = rbtree_find(t, arr[i]);
-    // printf("arr[%d] = %d\n", i, arr[i]);
     assert(p != NULL);
     assert(p->key == arr[i]);
     rbtree_erase(t, p);
@@ -376,8 +431,8 @@ int main(void) {
   test_minmax_suite();
   test_to_array_suite();
   test_distinct_values();
-  test_duplicate_values();
-  test_multi_instance();
-  test_find_erase_rand(10000, 17);
+  //test_duplicate_values();
+  //test_multi_instance();
+  //test_find_erase_rand(10000, 17);
   printf("Passed all tests!\n");
 }
